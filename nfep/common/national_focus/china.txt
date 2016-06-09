@@ -147,7 +147,6 @@ focus_tree = {
 			158 = {
 				custom_effect_tooltip = CHI_fortify_cities_loc
 				hidden_effect = {
-				hidden_effect = {
 					add_building_construction = {
 						type = bunker
 						level = 5
@@ -165,7 +164,6 @@ focus_tree = {
 						level = 5
 						province = 12076
 						instant_build = yes
-					}
 					}
 				}
 			}
