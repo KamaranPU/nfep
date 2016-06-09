@@ -1,0 +1,674 @@
+#TODO : add chinese faction tree, add modernization tree, localize, add news events, add option to decline annexation as a player, various expansions to previous trees, add AI interaction
+focus_tree = {
+	id = chinese_focus
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = CHI
+		}
+	}
+	default = no
+	#Defend against Japan
+	focus = {
+		id = CHI_defend_against_japan
+			bypass = {
+			NOT = {
+				country_exists = JAP
+			}
+		}
+		icon = GFX_goal_generic_national_unity
+		x = 3
+		y = 0
+		cost = 10
+		completion_reward = {
+				add_tech_bonus = { bonus = 1.0 uses = 1 category = land_doctrine }
+		}
+	}
+	focus = {
+		id = CHI_naval_bombers
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_defend_against_japan }
+		x = 1
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = naval_bomber }
+		}
+	}
+		focus = {
+		id = CHI_defend_japanese_border
+		icon = GFX_goal_generic_construct_military
+		prerequisite = { focus = CHI_defend_against_japan }
+		available = {
+		OR = {
+			JAP = {
+				OR = {
+				owns_state = 609
+				owns_state = 610
+				owns_state = 611
+				}
+			}
+			MEN = {
+				is_puppet_of = JAP
+				OR = {
+				owns_state = 609
+				owns_state = 610
+				owns_state = 611
+				}
+			}
+		}
+		}
+		x = 3
+		y = 1
+		cost = 10
+		completion_reward = {
+			158 = {
+				custom_effect_tooltip = CHI_defend_japanese_border_loc
+				hidden_effect = {
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 6828
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 12026
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 4140
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 9840
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 11761
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+		focus = {
+		id = CHI_Hui_enlistment
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_defend_against_japan }
+		x = 5
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = { bonus = 0.25 uses = 1 category = land_doctrine }
+			add_manpower = 100000
+		}
+	}
+		focus = {
+		id = CHI_diverse_army
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_Hui_enlistment }
+		x = 5
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_national_unity = 0.05
+		}
+	}
+		focus = {
+		id = CHI_dare_to_die_corps
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_defend_against_japan }
+		x = 7
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = { bonus = 0.5 uses = 1 category = land_doctrine }
+			set_country_flag = dare_to_die_corps
+		}
+	}
+		focus = {
+		id = CHI_fortify_cities
+		icon = GFX_goal_generic_construct_military
+		prerequisite = { focus = CHI_defend_japanese_border }
+		x = 3
+		y = 2
+		cost = 10
+		completion_reward = {
+			158 = {
+				custom_effect_tooltip = CHI_fortify_cities_loc
+				hidden_effect = {
+				hidden_effect = {
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 4619
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 6
+						province = 11913
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 12076
+						instant_build = yes
+					}
+					}
+				}
+			}
+		}
+	# Prestige
+		focus = {
+		id = CHI_redeem_international_prestige
+		icon = GFX_goal_generic_position_armies
+		x = 10
+		y = 0
+		cost = 10
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+		focus = {
+		id = CHI_project_power
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_redeem_international_prestige }
+		available = {
+		has_manpower > 5000000
+		}
+		x = 9
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+		focus = {
+		id = CHI_industrial_might
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_redeem_international_prestige }
+		available = {
+		num_of_civilian_factories > 50
+		}
+		x = 11
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+		focus = {
+		id = CHI_become_major
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = CHI_project_power }
+		prerequisite = { focus = CHI_industrial_might }
+		x = 10
+		y = 2
+		cost = 10
+		completion_reward = {
+			set_major = yes
+		}
+	}
+	# Allies focus
+		focus = {
+		id = CHI_embrace_democracy
+		icon = GFX_goal_generic_position_armies
+		x = 15
+		y = 0
+		mutually_exclusive = { focus = CHI_embrace_fascism }
+		mutually_exclusive = { focus = CHI_embrace_communism }
+		cost = 10
+		completion_reward = {
+				add_popularity = { ideology = democratic popularity = 0.1 }
+			}
+		}
+	focus = {
+		id = CHI_befriend_uk
+		prerequisite = { focus = CHI_embrace_democracy }
+			bypass = {
+			NOT = {
+				country_exists = ENG
+			}
+		}
+		available = {
+		has_government = democratic
+		}
+		icon = GFX_goal_generic_position_armies
+		x = 15
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_opinion_modifier = { target = ENG modifier = CHI_uk_improved_relations }
+			random_country = {
+				limit = {
+					tag = ENG
+				}
+				add_opinion_modifier = { target = CHI modifier = CHI_uk_improved_relations }
+			}
+		}
+	}
+	focus = {
+		id = CHI_return_enclaves
+		icon = GFX_goal_anschluss
+		prerequisite = { focus = CHI_befriend_uk }
+		x = 15
+		y = 2
+		cost = 10
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = ENG
+					ENG = {
+						owns_state = 326
+					}
+				}
+				CHI = { transfer_state = 326 }
+				}
+			if = {
+				limit = {
+					country_exists = POR
+					POR = {
+						owns_state = 729
+						is_in_faction_with = ENG
+					}
+				}
+				CHI = { transfer_state = 729 }
+				}
+			if = {
+				limit = {
+					country_exists = FRA
+					FRA = {
+						owns_state = 728
+						is_in_faction_with = ENG
+					}
+				}
+				CHI = { transfer_state = 728 }
+				}
+			}
+	}
+	focus = {
+		id = CHI_befriend_us
+			bypass = {
+			NOT = {
+				country_exists = USA
+			}
+		}
+		prerequisite = { focus = CHI_befriend_uk }
+		icon = GFX_goal_generic_position_armies
+		x = 13
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_opinion_modifier = { target = USA modifier = CHI_us_improved_relations }
+			random_country = {
+				limit = {
+					tag = USA
+				}
+				add_opinion_modifier = { target = CHI modifier = CHI_us_improved_relations }
+			}
+		}
+	}
+	# Axis focus
+		focus = {
+		id = CHI_embrace_fascism
+		icon = GFX_goal_generic_position_armies
+		x = 17
+		y = 0
+		mutually_exclusive = { focus = CHI_embrace_democracy }
+		mutually_exclusive = { focus = CHI_embrace_communism }
+		cost = 10
+		completion_reward = {
+				add_popularity = { ideology = fascism popularity = 0.1 }
+			}
+		}
+		focus = {
+		id = CHI_befriend_germany
+			bypass = {
+			NOT = {
+				country_exists = GER
+			}
+		}
+		available = {
+		has_government = fascist
+		}
+		prerequisite = { focus = CHI_embrace_fascism }
+		icon = GFX_goal_generic_position_armies
+		x = 17
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_opinion_modifier = { target = GER modifier = CHI_germany_improved_relations }
+			random_country = {
+				limit = {
+					tag = GER
+				}
+				add_opinion_modifier = { target = CHI modifier = CHI_germany_improved_relations }
+			}
+		}
+	}
+		focus = {
+		id = CHI_befriend_japan
+		prerequisite = { focus = CHI_befriend_germany }
+		icon = GFX_goal_generic_position_armies
+		x = 17
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_opinion_modifier = { target = JAP modifier = CHI_japan_improved_relations }
+			random_country = {
+				limit = {
+					tag = JAP
+				}
+				add_opinion_modifier = { target = CHI modifier = CHI_japan_improved_relations }
+			}
+		}
+	}
+	focus = {
+		id = CHI_return_stolen_territory
+		icon = GFX_goal_anschluss
+		prerequisite = { focus = CHI_befriend_japan }
+		x = 17
+		y = 3
+		cost = 20
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 524
+					}
+				}
+				CHI = { transfer_state = 524 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 525
+					}
+				}
+				CHI = { transfer_state = 525 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 527
+					}
+				}
+				CHI = { transfer_state = 527 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 716
+					}
+				}
+				CHI = { transfer_state = 716 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 715
+					}
+				}
+				CHI = { transfer_state = 715 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 717
+					}
+				}
+				CHI = { transfer_state = 717 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 714
+					}
+				}
+				CHI = { transfer_state = 714 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 328
+					}
+				}
+				CHI = { transfer_state = 328 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 610
+					}
+				}
+				CHI = { transfer_state = 610 }
+				}
+			if = {
+				limit = {
+					country_exists = JAP
+					JAP = {
+						owns_state = 609
+					}
+				}
+				CHI = { transfer_state = 609 }
+				}
+			if = {
+				limit = {
+					country_exists = MEN
+					MEN = {
+						owns_state = 611
+					}
+				}
+				CHI = { transfer_state = 611 }
+				}
+			if = {
+				limit = {
+					country_exists = MEN
+					MEN = {
+						owns_state = 612
+					}
+				}
+				CHI = { transfer_state = 612 }
+				}
+			}
+	}
+	focus = {
+		id = CHI_intimidate_tibet
+		icon = GFX_goal_anschluss
+		prerequisite = { focus = CHI_befriend_germany }
+		available = {
+		has_manpower > 1000000
+		}
+		bypass = {
+			NOT = {
+				TIB = {
+				owns_state = 322
+				}
+			}
+		}
+		x = 19
+		y = 2
+		cost = 10
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = TIB
+					TIB = {
+						owns_state = 322
+					}
+				}
+				CHI = { transfer_state = 322 }
+				}
+		}
+	}
+	focus = {
+		id = CHI_foreful_return_enclaves
+		icon = GFX_goal_anschluss
+		prerequisite = { focus = CHI_intimidate_tibet }
+		x = 19
+		y = 3
+		cost = 10
+		available = {
+		has_manpower > 2500000
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = ENG
+					ENG = {
+						owns_state = 326
+					}
+				}
+				CHI = { transfer_state = 326 }
+				}
+			if = {
+				limit = {
+					country_exists = POR
+					POR = {
+						owns_state = 729
+					}
+				}
+				CHI = { transfer_state = 729 }
+				}
+			if = {
+				limit = {
+					country_exists = FRA
+					FRA = {
+						owns_state = 728
+					}
+				}
+				CHI = { transfer_state = 728 }
+				}
+			}
+	}
+	# Communists focus
+		focus = {
+		id = CHI_embrace_communism
+		mutually_exclusive = { focus = CHI_embrace_fascism }
+		mutually_exclusive = { focus = CHI_embrace_democracy }
+		icon = GFX_goal_generic_position_armies
+		x = 21
+		y = 0
+		cost = 10
+		completion_reward = {
+				add_popularity = { ideology = communism popularity = 0.1 }
+			}
+		}
+		focus = {
+		id = CHI_befriend_ussr
+			bypass = {
+			NOT = {
+				country_exists = SOV
+			}
+		}
+		available = {
+		has_government = communism
+		}
+		prerequisite = { focus = CHI_embrace_communism }
+		icon = GFX_goal_generic_position_armies
+		x = 21
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_opinion_modifier = { target = SOV modifier = CHI_ussr_improved_relations }
+			random_country = {
+				limit = {
+					tag = GER
+				}
+				add_opinion_modifier = { target = CHI modifier = CHI_ussr_improved_relations }
+			}
+		}
+	}
+		focus = {
+		id = CHI_a_glorious_nation
+		prerequisite = { focus = CHI_befriend_ussr }
+		icon = GFX_goal_generic_position_armies
+		x = 21
+		y = 2
+		cost = 10
+		completion_reward = {
+		add_national_unity = 0.05
+		}
+	}
+	focus = {
+		id = CHI_reunite_China
+		prerequisite = { focus = CHI_a_glorious_nation }
+		icon = GFX_goal_generic_position_armies
+		x = 21
+		y = 3
+		cost = 20
+		available = { has_defensive_war = no }
+		completion_reward = {
+			random_country = {
+				limit = {
+					tag = PRC
+				}
+				CHI = {
+				annex_country = { target = PRC }
+			}
+		}
+			random_country = {
+				limit = {
+					tag = XSM
+				}
+				CHI = {
+				annex_country = { target = XSM }
+			}
+		}
+			random_country = {
+				limit = {
+					tag = SHX
+				}
+				CHI = {
+				annex_country = { target = SHX }
+				}
+			}
+			random_country = {
+				limit = {
+					tag = GXC
+				}
+				CHI = {
+				annex_country = { target = GXC }
+				}
+			}
+			random_country = {
+				limit = {
+					tag = YUN
+				}
+				CHI = {
+				annex_country = { target = YUN}
+				}
+			}
+			random_country = {
+				limit = {
+					tag = SIK
+				}
+				CHI = {
+				annex_country = { target = SIK}
+				}
+			}
+		}
+	}
+	# Own faction tree
+}

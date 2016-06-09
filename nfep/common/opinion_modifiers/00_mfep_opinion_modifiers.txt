@@ -1,0 +1,17 @@
+opinion_modifiers = {
+	CHI_uk_improved_relations = {
+	value = 50
+	}
+	CHI_germany_improved_relations = {
+	value = 50
+	}
+	CHI_japan_improved_relations = {
+	value = 50
+	}
+	CHI_us_improved_relations = {
+	value = 50
+	}
+	CHI_ussr_improved_relations = {
+	value = 50
+	}
+}
