@@ -1,0 +1,381 @@
+####
+# Brazil.
+# Very much WIP
+#
+####
+
+Focus_tree = {
+	id = brazil_focus
+		
+	country = {
+		factor = 1
+		modifier = {
+		tag = BRA
+		}
+	}
+	
+	default = yes
+	reset_on_civil_war = no
+	
+	#General Army Improvements
+	focus = {
+		id = army_experience
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 4
+		y = 0
+		cost = 10
+		completion_reward = {
+			army_experience = 5
+		}
+	}
+	
+	#Equipment Improvements
+	focus = {
+		id = equipment_effort
+		icon = GFX_goal_generic_small_arms
+		prerequisite = { focus = army_experience }
+		x = 1
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+	
+	focus = {
+		id = equipment_effort2
+		icon = GFX_goal_generic_army_artillery
+		prerequisite = { focus = equipment_effort }
+		x = 1
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+	
+	#Artillery Improvements
+	focus = {
+		id = artillery_effort
+		icon = GFX_goal_generic_army_artillery2
+		prerequisite = { focus = army_experience }
+		x = 3
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = artillery_bonus
+				bonus = 0.5
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+	
+	focus = {
+		id = artillery_effort2
+		icon = GFX_goal_generic_army_artillery2
+		prerequisite = { focus = artillery_effort }
+		x = 3
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = artillery_bonus
+				bonus = 0.5
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+	
+	#Motorized Improvements
+	focus = {
+		id = motorization_effort
+		icon = GFX_goal_generic_army_motorized
+		prerequisite = { focus = army_experience }
+		bypass = { has_tech = motorised_infantry }
+		x = 5
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = motorized_bonus
+				bonus = 0.75
+				technology = motorised_infantry
+			}
+		}
+	}
+	
+	focus = {
+		id = motorization_effort2
+		icon = GFX_goal_generic_army_motorized
+		prerequisite = { focus = motorization_effort }
+		x = 5
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = motorized_bonus
+				bonus = 0.75
+				technology = motorised_infantry
+			}
+		}
+	}
+	
+	#Land Doctrine
+	focus = {
+		id = doctrine_effort
+		icon = GFX_goal_generic_army_doctrines
+		prerequisite = { focus = army_experience }
+		x = 7
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = doctrine_effort2
+		icon = GFX_goal_generic_army_doctrines
+		prerequisite = { focus = doctrine_effort }
+		x = 7
+		y = 2
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	
+	#Special Forces
+	focus = {
+		id = special_forces
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = equipment_effort2 }
+		prerequisite = { focus = artillery_effort2 }
+		x = 2
+		y = 3
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 0.5
+				uses = 1
+				technology = paratroopers
+				technology = marines
+				technology = tech_mountaineers
+			}
+		}
+	}
+	
+	focus = {
+		id = marine_focus
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = special_forces }
+		mutually_exclusive = { focus = mountain_focus }
+		mutually_exclusive = { focus = paratrooper_focus }
+		x = 0
+		y = 4
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = marine_bonus
+				bonus = 0.5
+				uses = 1
+				technology = marines
+				technology = marines2
+				technology = marines3
+			}
+		}
+	}
+	
+	focus = {
+		id = marine_focus2
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = marine_focus }
+		x = 0
+		y = 5
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = marine_bonus
+				ahead_reduction = 0.5
+				uses = 1
+				technology = marines
+				technology = marines2
+				technology = marines3
+			}
+		}
+	}
+	
+	focus = {
+		id = mountain_focus
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = special_forces }
+		mutually_exclusive = { focus = marine_focus }
+		mutually_exclusive = { focus = paratrooper_focus }
+		x = 2
+		y = 4
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = moutain_bonus
+				bonus = 0.5
+				uses = 1
+				technology = tech_mountaineers
+				technology = tech_mountaineers2
+				technology = tech_mountaineers3
+			}
+		}
+	}
+	
+	focus = {
+		id = mountain_focus2
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = mountain_focus }
+		x = 2
+		y = 5
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = moutain_bonus
+				ahead_reduction = 0.5
+				uses = 1
+				technology = tech_mountaineers
+				technology = tech_mountaineers2
+				technology = tech_mountaineers3
+			}
+		}
+	}
+	
+	
+	focus = {
+		id = paratrooper_focus
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = special_forces }
+		mutually_exclusive = { focus = marine_focus }
+		mutually_exclusive = { focus = mountain_focus }
+		x = 4
+		y = 4
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = paratrooper_bonus
+				bonus = 0.5
+				uses = 1
+				technology = paratroopers
+				technology = paratroopers2
+				technology = paratroopers3
+			}
+		}
+	}
+	
+	focus = {
+		id = paratrooper_focus2
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = paratrooper_focus }
+		x = 4
+		y = 5
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = paratrooper_bonus
+				ahead_reduction = 0.5
+				uses = 1
+				technology = paratroopers
+				technology = paratroopers2
+				technology = paratroopers3
+			}
+		}
+	}
+	
+	focus = {
+		id = army_experience2
+		icon = GFX_goal_generic_allies_build_infantry
+		prerequisite = { focus = marine_focus2 focus = mountain_focus2 focus = paratrooper_focus2 }
+		x = 2
+		y = 6
+		cost = 20
+		completion_reward = {
+			army_experience = 10
+		}
+	}	
+	
+	#Armor Improvements
+	focus = {
+		id = armor_effort
+		icon = GFX_goal_generic_army_tanks
+		prerequisite = { focus = artillery_effort2 focus = motorization_effort2 }
+		x = 6
+		y = 4
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = armor_effort2
+		icon = GFX_goal_generic_army_tanks
+		prerequisite = { focus = armor_effort }
+		x = 6
+		y = 5
+		cost = 10
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				ahead_reduction = 0.5
+				uses = 1
+				category = armor
+			}
+		}
+	}
+
+	
+	#------------
+	
+	#industrial Improvements
+	
+	#focus = {
+	#add civilian factory
+	#}
+	
+	#focus = {
+	#add infrastructure in Para (496) and Bahia (499)
+	#}
+	
+	#focus = {
+	#add synthetic refineries to two provinces
+	#}
+	
+	#Defensive Improvements
+	#focus = {
+	#add coastal fort x2 in Rio de Janeiro
+	#}
+}
